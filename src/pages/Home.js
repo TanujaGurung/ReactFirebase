@@ -31,6 +31,7 @@ function Home() {
     }
   };
 
+
   const clickSignup = () => {
     navigate("/signup");
   };

@@ -90,8 +90,8 @@ function DataTable(props) {
     //      Header:latitude,
     //     }
     //    ],
-     { Header: 'Date',
-     accessor: 'Date',},
+    //  { Header: 'Date',
+    //  accessor: 'Date',},
      { Header: 'Name',
      accessor: 'Name',},
      { Header: ' ',
@@ -120,7 +120,7 @@ function DataTable(props) {
   //const tableData = React.useMemo(()=> data,[data])
    //console.log("searchText", searchText)
    
-//console.log("tableData", tableData)
+console.log("tableData", data)
   return (
     <Styles>
       <div>
