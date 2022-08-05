@@ -2,7 +2,7 @@ import React from "react"
 import styled from 'styled-components'
 import { useTable } from 'react-table'
 import { db } from '../Firebase/firebase'
-import { collection, getDocs, deleteDoc, doc} from 'firebase/firestore'
+import { collection, getDocs, query, where} from 'firebase/firestore'
 import {default as Search}  from "./Search"
 import RenderCell from "./RenderCell"
 
@@ -119,13 +119,26 @@ function DataTable(props) {
 
   //const tableData = React.useMemo(()=> data,[data])
    //console.log("searchText", searchText)
+
+   const handleSearch = async(e) => {
+    e.preventDefault();
+    let find = [];
+    console.log("search here")
+    const q = query(collection(db, "Data"), where("Name", "==", searchText));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      find.push({id: doc.id, ...doc.data()});
+    });
+    setData(find);
+    console.log("find",find);
+  }
    
 console.log("tableData", data)
   return (
     <Styles>
       <div>
         <input type="text" value={searchText} placeholder="search" onChange={(e)=>{setSearchText(e.target.value)}}/>
-        <span><button ><Search /></button></span>
+        <span><button onClick={handleSearch}><Search /></button></span>
       </div>
       <br/>
       <Table columns={columns} data={data? data: []} />
